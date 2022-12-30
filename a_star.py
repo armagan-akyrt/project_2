@@ -8,6 +8,7 @@ class a_star:
         self.graph = graph
         self.S = S
         self.D = D
+        self.repetitions = 0
 
     def find_shortest_path(self):
         """TODO: It's mostly chatgpt code, although works, needs improvements."""
@@ -22,26 +23,29 @@ class a_star:
         while not queue.empty():
             # Extract the node with the lowest cost
             current = queue.get()
+            self.repetitions += 1
 
             # Return the shortest path and cost if we have reached the destination
             if current == self.D:
                 path = self.reconstruct_path(parent, self.S, self.D)
-                return path, cost[self.D]
+                return path, cost[self.D], self.repetitions
 
             # Expand the neighbors of the current node
             for neighbor in self.graph[current]:
+                self.repetitions += 1
                 # Calculate the cost of the path from the starting node to the neighbor
                 new_cost = cost[current] + self.graph[current][neighbor]
 
                 # Update the cost and parent of the neighbor if the calculated cost is lower
                 if neighbor not in cost or new_cost < cost[neighbor]:
+                    self.repetitions += 1
                     cost[neighbor] = new_cost
                     priority = new_cost + self.heuristic(neighbor, self.D)
                     queue.put(neighbor, priority)
                     parent[neighbor] = current
 
         # Return None if no path was found
-        return None, None
+        return None, None, None
 
     def reconstruct_path(self, parent, S, D):
         # Initialize the path with the destination node
@@ -49,6 +53,7 @@ class a_star:
 
         # Follow the parent pointers back to the starting node
         while D != S:
+            self.repetitions += 1
             path.append(parent[D])
             D = parent[D]
 
