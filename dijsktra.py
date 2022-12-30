@@ -1,6 +1,5 @@
 import heapq
 
-
 class Dijkstra:
     """Dijkstra's algorithm"""
 
@@ -32,8 +31,10 @@ class Dijkstra:
 
             # Stop if we have reached the destination node
             if current_node == self.D:
+                self.repetitions +=1
                 break
 
+            #RELAX
             # Iterate through all neighbors of current node
             for neighbor, neighbor_distance in self.graph[current_node].items():
                 self.repetitions += 1  # increment counter for block of repetition

@@ -1,6 +1,8 @@
 # This is a sample Python script.
 import heapq
 import math
+import random
+
 import networkx as nx
 import numpy as np
 import time
@@ -10,14 +12,13 @@ import matplotlib.pyplot as plt
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 from a_star import a_star
 
-
 def main():
     N = int(input("Please provide number of desired graphs: "))
 
     S = int(input("Starting city: "))
     D = int(input("Destination city: "))
 
-    time_interval = 5
+    time_interval = 0
     # Creates the adjacency matrix for graph
     graph = {}
     for i in range(1, N + 1):   # project description clearly stated that first node should be 1
@@ -74,7 +75,7 @@ def main():
     # Dijkstra Part 3
     c1 = 1
     # Set values for N
-    ns = [10, 50, 100, 200, 500, 1000, 2000]
+    ns = [10, 25, 50, 100, 200, 500, 1000, 2000]
 
     # Set source and destination nodes
     S = 1
@@ -92,6 +93,8 @@ def main():
             for j in range(1, N + 1):
                 if abs(i - j) <= 3 and i != j:
                     set[j] = i + j  # adds weights to the set
+                else:
+                    set[j] = math.inf
 
             graph[i] = set  # adds outgoing edges of initial number to graph
 
