@@ -23,9 +23,10 @@ class a_star:
             # Extract the node with the lowest cost
             current = queue.get()
 
-            # Return the shortest path if we have reached the destination
+            # Return the shortest path and cost if we have reached the destination
             if current == self.D:
-                return self.reconstruct_path(parent, self.S, self.D)
+                path = self.reconstruct_path(parent, self.S, self.D)
+                return path, cost[self.D]
 
             # Expand the neighbors of the current node
             for neighbor in self.graph[current]:
@@ -40,7 +41,7 @@ class a_star:
                     parent[neighbor] = current
 
         # Return None if no path was found
-        return None
+        return None, None
 
     def reconstruct_path(self, parent, S, D):
         # Initialize the path with the destination node
