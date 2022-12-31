@@ -38,7 +38,6 @@ class a_star:
 
                 # Update the cost and parent of the neighbor if the calculated cost is lower
                 if neighbor not in cost or new_cost < cost[neighbor]:
-                    self.repetitions += 1
                     cost[neighbor] = new_cost
                     priority = new_cost + self.heuristic(neighbor, self.D)
                     queue.put(neighbor, priority)
@@ -62,3 +61,6 @@ class a_star:
 
     def heuristic(self, i, j):
         return abs(j - i)
+
+    def get_repetition(self):
+        return self.repetitions

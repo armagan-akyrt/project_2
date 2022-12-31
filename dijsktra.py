@@ -31,7 +31,6 @@ class Dijkstra:
 
             # Stop if we have reached the destination node
             if current_node == self.D:
-                self.repetitions +=1
                 break
 
             #RELAX
@@ -46,11 +45,9 @@ class Dijkstra:
                 if new_distance < distances[neighbor]:
                     distances[neighbor] = new_distance
                     previous[neighbor] = current_node
-                    self.repetitions += 1  # increment counter for block of repetition
 
                     # Add neighbor to min heap
                     heapq.heappush(min_heap, (new_distance, neighbor))
-                    self.repetitions += 1  # increment counter for block of repetition
 
         # Create list to store shortest path
         shortest_path = []
