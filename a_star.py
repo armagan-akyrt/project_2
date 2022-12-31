@@ -11,7 +11,6 @@ class a_star:
         self.repetitions = 0
 
     def find_shortest_path(self):
-        """TODO: It's mostly chatgpt code, although works, needs improvements."""
         # Initialize the priority queue with the starting node
         queue = PriorityQueue()
         queue.put(self.S, 0)
