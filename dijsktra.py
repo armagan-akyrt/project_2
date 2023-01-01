@@ -1,8 +1,8 @@
 import heapq
 
+
 class Dijkstra:
     """Dijkstra's algorithm"""
-
     def __init__(self, graph, S, D):
         self.graph = graph
         self.S = S
@@ -18,7 +18,7 @@ class Dijkstra:
         min_heap = []
         for node, distance in distances.items():
             heapq.heappush(min_heap, (distance, node))
-            self.repetitions += 1  # increment counter for block of repetition
+        self.repetitions += 1  # increment counter for block of repetition
 
         # Initialize previous node for each node as None
         previous = {node: None for node in self.graph}
@@ -33,7 +33,6 @@ class Dijkstra:
             if current_node == self.D:
                 break
 
-            #RELAX
             # Iterate through all neighbors of current node
             for neighbor, neighbor_distance in self.graph[current_node].items():
                 self.repetitions += 1  # increment counter for block of repetition
