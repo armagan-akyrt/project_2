@@ -1,6 +1,8 @@
 import math
 import heapq
 from queue import PriorityQueue
+
+
 class a_star:
     """Uses A* algorithm to find the shortest path between two nodes."""
 
