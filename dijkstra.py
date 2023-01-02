@@ -4,12 +4,18 @@ import heapq
 class Dijkstra:
     """Dijkstra's algorithm"""
     def __init__(self, graph, S, D):
-        self.graph = graph
-        self.S = S
-        self.D = D
+        """
+        Initialize the algorithm with the given graph, source node S, and destination node D.
+        """
+        self.graph = graph  # the input graph, represented as a dictionary of node: {neighbor: distance} pairs
+        self.S = S  # the source node
+        self.D = D  # the destination node
         self.repetitions = 0  # initialize counter for total number of repetitions
 
     def find_shortest_path(self):
+        """
+        Find the shortest path from the source node to the destination node in the graph.
+        """
         # Initialize distances to all nodes as infinite and distance to source as 0
         distances = {node: float('inf') for node in self.graph}
         distances[self.S] = 0
@@ -60,10 +66,12 @@ class Dijkstra:
 
         # Reverse the list to get the correct order of the shortest path
         shortest_path = shortest_path[::-1]
-
+        repetitions = self.repetitions
         # Return the shortest path and the cost of the path
-        return shortest_path, distances[self.D]
+        return shortest_path, distances[self.D], repetitions
 
     def get_repetitions(self):
-        """Returns the total number of repetitions"""
+        """
+        Returns the total number of repetitions.
+        """
         return self.repetitions
