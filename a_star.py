@@ -19,7 +19,7 @@ class a_star:
 
         # Initialize the parent dictionary
         parent = {self.S: None}
-        ixf = 0
+
         while not queue.empty():
             # Extract the node with the lowest f_cost
             current = queue.get()
@@ -32,7 +32,6 @@ class a_star:
 
             # Expand the neighbors of the current node
             for neighbor in self.graph[current]:
-                ixf += 1
                 self.repetitions += 1
                 # Calculate the cost of the path from the starting node to the neighbor
                 new_g_cost = self.g_cost[current] + self.graph[current][neighbor]
