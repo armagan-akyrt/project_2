@@ -1,5 +1,6 @@
 from queue import PriorityQueue
 
+
 class a_star:
     """Uses A* algorithm to find the shortest path between two nodes."""
 
@@ -66,4 +67,3 @@ class a_star:
 
     def get_repetition(self):
         return self.repetitions
-
