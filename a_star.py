@@ -1,6 +1,5 @@
 from queue import PriorityQueue
 
-
 class a_star:
     """Uses A* algorithm to find the shortest path between two nodes."""
 
@@ -59,7 +58,7 @@ class a_star:
         return path[::-1]
 
     def heuristic(self, i, j):
-        return abs(i + j)
+        return abs(i - j)
 
     def get_repetition(self):
         return self.repetitions

@@ -28,7 +28,7 @@ def main():
                                                                                                           1]))
     print('Repetition of Dijkstra algorithm:', dijkstra_test.get_repetitions())
     print()
-    decision = input('D=>Dijkstra, A=> A* to visualize the graph: ').lower()
+    decision = input('d=>Dijkstra, a=> A* to visualize the graph: ').lower()
 
     if decision == 'd':
         visualize_matrix(graph, dijkstra_results, 'Dijkstra')
@@ -130,7 +130,7 @@ def visualize_matrix(graph, path, algorithm):
 
     # Add nodes and edges to the graph
     for i in range(1, len(graph) + 1):
-        for j in range(1, len(graph) + 1):
+        for j in range(1, len(graph[i]) + 1):
             if graph[i][j] != math.inf:
                 G.add_edge(i, j, weight=graph[i][j])
 
