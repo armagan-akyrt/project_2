@@ -5,7 +5,6 @@ from dijkstra import Dijkstra
 from a_star import a_star
 import matplotlib.pyplot as plt
 
-
 def main():
 
     N = int(input("Please provide number of desired graphs: "))
@@ -93,9 +92,11 @@ def main():
     # Calculate theoretical running times
     theoretical_running_times_d = [c1 * m for N, m in zip(ns, repetitions_d)]
     theoretical_running_times_a = [c1 * m for N, m in zip(ns, repetitions_a)]
-    print('Running times of Dijkstra:\n' + str(running_times_d))
-    print()
-    print('Running times of A*:\n' + str(running_times_a))
+    for i in range(len(ns)):
+        print('Running times of Dijkstra:\n{}: {}'.format(ns[i], running_times_d[i]))
+        print('Running times of A*:\n{}: {}'.format(ns[i], running_times_a[i]))
+        print()
+
 
     # plot actual and theoretical running time results of two algorithms
     figure, axis = plt.subplots(2, 2, figsize=(10, 10))
@@ -138,18 +139,18 @@ def visualize_matrix(graph, path, algorithm):
     layout = input('Choose a layout for graph\n1:spring\n2:circular\n3:spiral\n4:random\n')
 
     # Set node positions
-    match layout:
-        case '1':
-            pos = nx.spring_layout(G)
 
-        case '2':
-            pos = nx.circular_layout(G)
-        case '3':
-            pos = nx.spiral_layout(G)
-        case '4':
-            pos = nx.random_layout(G)
-        case _:
-            pos = nx.spring_layout(G)  # default is spring layout
+    if layout == '1':
+        pos = nx.spring_layout(G)
+    elif layout == '2':
+        pos = nx.circular_layout(G)
+    elif layout == '3':
+        pos = nx.spiral_layout(G)
+    elif layout == '4':
+        pos = nx.random_layout(G)
+    else:
+        pos = nx.spring_layout(G)  # default is spring layout
+
 
     # Draw the first graph
     plt.figure()
