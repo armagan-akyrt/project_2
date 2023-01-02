@@ -5,6 +5,7 @@ from dijkstra import Dijkstra
 from a_star import a_star
 import matplotlib.pyplot as plt
 
+
 def main():
 
     N = int(input("Please provide number of desired graphs: "))
@@ -26,9 +27,9 @@ def main():
                                                                                                           0],
                                                                                                       dijkstra_results[
                                                                                                           1]))
-    print('Repetition of Dijkstra algorithm:', dijkstra_test.get_repetitions())
+    print('Repetition of Dijkstra algorithm:', dijkstra_results[2])
     print()
-    decision = input('d=>Dijkstra, a=> A* to visualize the graph: ').lower()
+    decision = input('D=>Dijkstra, A=> A* to visualize the graph: ').lower()
 
     if decision == 'd':
         visualize_matrix(graph, dijkstra_results, 'Dijkstra')
@@ -97,29 +98,26 @@ def main():
         print('Running times of A*:\n{}: {}'.format(ns[i], running_times_a[i]))
         print()
 
-
     # plot actual and theoretical running time results of two algorithms
     figure, axis = plt.subplots(2, 2, figsize=(10, 10))
 
     axis[0, 0].plot(ns, theoretical_running_times_d, )
     axis[0, 0].set_title("Dijkstra Theoretical Running Time")
-    axis[0, 0].set_ylim(0)
+    axis[0, 0].set_xlabel("Number of nodes (N)")
 
     axis[0, 1].plot(ns, running_times_d)
     axis[0, 1].set_title("Actual Running Time (Dijkstra)")
+    axis[0, 1].set_xlabel("Number of nodes (N)")
+    axis[0, 1].set_ylabel("Running time (microseconds)")
 
     axis[1, 0].plot(ns, theoretical_running_times_a, )
     axis[1, 0].set_title("A* theoretical Running Time")
-    axis[1, 0].set_ylim(0)
+    axis[1, 0].set_xlabel("Number of nodes (N)")
 
     axis[1, 1].plot(ns, running_times_a)
-    axis[1, 1].set_title("Actual Running Time (a*)")
-
-    # Plot actual and theoretical running times
-    # plt.plot(ns, running_times, label="Actual running time")
-    # plt.plot(ns, theoretical_running_times, label="Theoretical running time")
-    plt.xlabel("Number of nodes (N)")
-    plt.ylabel("Running time (seconds)")
+    axis[1, 1].set_title("Actual Running Time (A*)")
+    axis[1, 1].set_xlabel("Number of nodes (N)")
+    axis[1, 1].set_ylabel("Running time (microseconds)")
 
     plt.show()
 
@@ -130,7 +128,7 @@ def visualize_matrix(graph, path, algorithm):
 
     # Add nodes and edges to the graph
     for i in range(1, len(graph) + 1):
-        for j in range(1, len(graph[i]) + 1):
+        for j in range(1, len(graph) + 1):
             if graph[i][j] != math.inf:
                 G.add_edge(i, j, weight=graph[i][j])
 
@@ -139,22 +137,21 @@ def visualize_matrix(graph, path, algorithm):
     layout = input('Choose a layout for graph\n1:spring\n2:circular\n3:spiral\n4:random\n')
 
     # Set node positions
-
-    if layout == '1':
-        pos = nx.spring_layout(G)
-    elif layout == '2':
-        pos = nx.circular_layout(G)
-    elif layout == '3':
-        pos = nx.spiral_layout(G)
-    elif layout == '4':
-        pos = nx.random_layout(G)
-    else:
-        pos = nx.spring_layout(G)  # default is spring layout
-
+    match layout:
+        case '1':
+            pos = nx.spring_layout(G)
+        case '2':
+            pos = nx.circular_layout(G)
+        case '3':
+            pos = nx.spiral_layout(G)
+        case '4':
+            pos = nx.random_layout(G)
+        case _:
+            pos = nx.spring_layout(G)  # default is spring layout
 
     # Draw the first graph
     plt.figure()
-    nx.draw(G, pos, with_labels=True, node_size=600, font_size=8)
+    nx.draw(G, pos, with_labels=True, node_size=400, font_size=8)
 
     # Add edge labels
     labels = nx.get_edge_attributes(G, 'weight')
